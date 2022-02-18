@@ -1,13 +1,16 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import Head from "next/head";
-import { Header } from "components/organisms/Header";
+import { Header } from "src/components/organisms/Header";
+import { Footer } from "src/components/organisms/Footer";
+import { Content } from "src/components/organisms/Content";
 
 type Props = {
   title: string;
+  h1text: string;
   children: ReactNode;
 };
 
-export const Template: FC<Props> = ({ title, children }) => {
+export const Template: FC<Props> = ({ title, h1text, children }) => {
   return (
     <div>
       <Head>
@@ -16,8 +19,8 @@ export const Template: FC<Props> = ({ title, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      {children}
-      <footer></footer>
+      <Content h1text={h1text} />
+      <Footer />
     </div>
   );
 };
