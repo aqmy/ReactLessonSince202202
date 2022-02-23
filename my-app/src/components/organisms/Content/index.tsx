@@ -1,14 +1,10 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-type Props = {
-  h1text: string;
-};
-
-export const Content: FC<Props> = ({ h1text }) => {
+export const Content: FC = () => {
   return (
     <StContentWrap>
-      <StContentH1>{h1text}</StContentH1>
+      <StContentH1>react初心者向け講座</StContentH1>
     </StContentWrap>
   );
 };
