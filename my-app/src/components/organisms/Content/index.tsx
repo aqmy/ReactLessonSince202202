@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import styled from "styled-components";
 import { Counter } from "src/components/molecules/Counter";
 import { TagArea, TagList } from "src/components/molecules/TagArea";
 

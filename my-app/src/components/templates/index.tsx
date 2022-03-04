@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import Head from "next/head";
-import { Header } from "components/organisms/Header";
-import { Footer } from "components/organisms/Footer";
+import { Header } from "src/components/organisms/Header";
+import { Footer } from "src/components/organisms/Footer";
 
 type Props = {
   title: string;
