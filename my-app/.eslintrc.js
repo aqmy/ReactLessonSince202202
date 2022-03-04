@@ -16,6 +16,7 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: "latest",
+    sourceType: "module",
     tsconfigRootDir: __dirname,
     project: ["./tsconfig.json"],
   },
