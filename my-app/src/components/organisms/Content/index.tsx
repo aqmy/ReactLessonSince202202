@@ -1,26 +1,55 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
+import { Counter } from "src/components/molecules/Counter";
+import { TagArea, TagList } from "src/components/molecules/TagArea";
 
 export const Content: FC = () => {
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => setCount(count + 1);
+  const handleDecrement = () => setCount(count - 1);
+
+  const [tag, setTag] = useState<string[]>([]);
+  const handleClearTag = () => setTag([]);
+  const handlePushTag = (addTag) => {
+    setTag(
+      tag.includes(addTag) ? tag.filter((i) => i !== addTag) : [...tag, addTag]
+    );
+  };
+
+  const tagList: TagList = [
+    { id: "tag1", value: "React" },
+    { id: "tag2", value: "Vue.js" },
+    { id: "tag3", value: "Angular" },
+    { id: "tag4", value: "Next.js" },
+    { id: "tag5", value: "Nuxt.js" },
+    { id: "tag6", value: "jQuery" },
+    { id: "tag7", value: "Gatsby.js" },
+  ];
+
   return (
-    <StContentWrap>
-      <StContentH1>react初心者向け講座</StContentH1>
-    </StContentWrap>
+    <div>
+      <div>
+        <h1>react初心者向け講座</h1>
+      </div>
+      <div>
+        <div>
+          <div>カウント</div>
+          <Counter
+            count={count}
+            handleDecrement={handleDecrement}
+            handleIncrement={handleIncrement}
+          />
+        </div>
+        <div>
+          <div>タグ</div>
+          <TagArea
+            tag={tag}
+            tagList={tagList}
+            handleClearTag={handleClearTag}
+            handlePushTag={handlePushTag}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
-
-const StContentWrap = styled.div`
-  background-color: rgb(240, 240, 240);
-  padding: 40px 20px;
-  height: 1000px;
-`;
-const StContentH1 = styled.h1`
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-size: 30px;
-  width: 100%;
-  min-height: 80px;
-  padding: 20px 10px;
-  border: 1px solid grey;
-  border-radius: 3px;
-`;
