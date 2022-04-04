@@ -16,6 +16,9 @@ export const TagArea: FC<Props> = ({
   handleClearTag,
   handlePushTag,
 }) => {
+  console.log("------------rerender component in TagArea----------");
+  console.log(tagList);
+
   return (
     <StWrapper>
       <StSelectedTagAreaWrapper>

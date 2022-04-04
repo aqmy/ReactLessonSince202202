@@ -1,11 +1,18 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Counter } from "src/components/molecules/Counter";
 import { TagArea, TagList } from "src/components/molecules/TagArea";
+import { useCount } from "./hooks";
 
 export const Content: FC = () => {
-  const [count, setCount] = useState(0);
-  const handleIncrement = () => setCount(count + 1);
-  const handleDecrement = () => setCount(count - 1);
+  console.log("ContentだよinContent");
+
+  //   const [count, setCount] = useState(0);
+  //   const handleIncrement = () => setCount(count + 1);
+  //   const handleDecrement = () => setCount(count - 1);
+
+  const { count, handleIncrement, handleDecrement, resetCount } = useCount();
+
+  console.log("useCount読み込んだよinContent");
 
   const [tag, setTag] = useState<string[]>([]);
   const handleClearTag = () => setTag([]);
@@ -15,16 +22,19 @@ export const Content: FC = () => {
     );
   };
 
-  const tagList: TagList = [
-    { id: "tag1", value: "React" },
-    { id: "tag2", value: "Vue.js" },
-    { id: "tag3", value: "Angular" },
-    { id: "tag4", value: "Next.js" },
-    { id: "tag5", value: "Nuxt.js" },
-    { id: "tag6", value: "jQuery" },
-    { id: "tag7", value: "Gatsby.js" },
-  ];
+  const [tagList, setTagList] = useState<TagList>([]);
 
+  useEffect(() => {
+    const getTag = async () => {
+      const res = await fetch("/api/tag");
+      const data: TagList = await res.json();
+
+      setTagList(data);
+    };
+    getTag();
+  }, []);
+
+  console.log("Content return前");
   return (
     <div>
       <div>
@@ -33,10 +43,11 @@ export const Content: FC = () => {
       <div>
         <div>
           <div>カウント</div>
-          <Counter
+          <Counter //memoってるから不用意に再描画されない
             count={count}
             handleDecrement={handleDecrement}
             handleIncrement={handleIncrement}
+            resetCount={resetCount}
           />
         </div>
         <div>
